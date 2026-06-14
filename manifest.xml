@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xsi:type="TaskPaneApp">
+
+  <!-- Unique ID for this add-in. Do not change once deployed. -->
+  <Id>0a5ed509-cbe1-42ee-9da4-56011c864bfa</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Janson</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Excel LLM Assistant" />
+  <Description DefaultValue="Ask an LLM questions about your workbook data" />
+
+  <!-- 
+    REPLACE "https://YOUR-HOST-URL" below with the actual base URL where 
+    you uploaded these files (OneDrive/SharePoint direct-link folder, 
+    or GitHub Pages URL, etc.)
+    Example: https://yourtenant.sharepoint.com/sites/yoursite/AddInFiles
+  -->
+  <IconUrl DefaultValue="https://YOUR-HOST-URL/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://YOUR-HOST-URL/assets/icon-80.png" />
+  <SupportUrl DefaultValue="https://YOUR-HOST-URL/" />
+
+  <Hosts>
+    <Host Name="Workbook" />
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://YOUR-HOST-URL/taskpane.html" />
+  </DefaultSettings>
+
+  <!-- Allows reading workbook data (selection / used range) -->
+  <Permissions>ReadWriteDocument</Permissions>
+
+</OfficeApp>
