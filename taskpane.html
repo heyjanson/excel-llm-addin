@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Excel LLM Assistant</title>
+
+  <!-- Office.js (required for any Office Add-in) -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      font-size: 13px;
+      padding: 12px;
+      color: #222;
+    }
+    h3 {
+      margin-top: 0;
+      font-size: 15px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      margin-top: 12px;
+    }
+    input[type="password"], select, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 6px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    textarea {
+      height: 60px;
+      resize: vertical;
+    }
+    .row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .row input {
+      flex: 1;
+    }
+    button {
+      padding: 6px 14px;
+      font-size: 13px;
+      border: none;
+      border-radius: 4px;
+      background: #0078d4;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005a9e;
+    }
+    button.secondary {
+      background: #e1e1e1;
+      color: #222;
+    }
+    button.secondary:hover {
+      background: #cfcfcf;
+    }
+    #scopeHint, #status {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+    #status {
+      min-height: 16px;
+      color: #b40000;
+    }
+    #answer {
+      margin-top: 12px;
+      padding: 8px;
+      background: #f3f3f3;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      min-height: 40px;
+      border: 1px solid #e0e0e0;
+    }
+    .ask-row {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Excel LLM Assistant</h3>
+
+  <label for="apiKey">OpenAI API Key</label>
+  <div class="row">
+    <input type="password" id="apiKey" placeholder="sk-..." />
+    <button class="secondary" id="saveKey">Save</button>
+  </div>
+  <div style="font-size:11px; color:#666; margin-top:4px;">
+    Stored only in this browser's local storage, not sent anywhere except OpenAI.
+  </div>
+
+  <label for="scope">Data to send</label>
+  <select id="scope">
+    <option value="selection">Current selection</option>
+    <option value="sheet">Active sheet (used range, up to 100 rows)</option>
+  </select>
+  <div id="scopeHint"></div>
+
+  <label for="question">Your question</label>
+  <textarea id="question" placeholder="e.g. What's the trend in column B, and which row is the outlier?"></textarea>
+
+  <div class="ask-row">
+    <button id="ask">Ask</button>
+  </div>
+
+  <div id="status"></div>
+  <div id="answer"></div>
+
+  <script src="taskpane.js"></script>
+  <script>
+    // Initialize scope hint on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const scopeEl = document.getElementById("scope");
+      if (scopeEl && typeof updateScopeHint === "function") {
+        updateScopeHint();
+      }
+    });
+  </script>
+</body>
+</html>
