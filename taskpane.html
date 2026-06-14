@@ -117,14 +117,5 @@
   <div id="answer"></div>
 
   <script src="taskpane.js"></script>
-  <script>
-    // Initialize scope hint on load
-    document.addEventListener("DOMContentLoaded", () => {
-      const scopeEl = document.getElementById("scope");
-      if (scopeEl && typeof updateScopeHint === "function") {
-        updateScopeHint();
-      }
-    });
-  </script>
 </body>
 </html>
